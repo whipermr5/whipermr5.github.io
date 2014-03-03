@@ -1,7 +1,59 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<script>
+var data = {};
+data["20140301"] = "1 Sam 15:1-9";
+data["20140302"] = "1 Sam 15:10-23";
+data["20140303"] = "1 Sam 15:24-35";
+data["20140304"] = "1 Sam 16:1-13";
+data["20140305"] = "1 Sam 16:14-23";
+data["20140306"] = "1 Sam 17:1-11";
+data["20140307"] = "1 Sam 17:12-27";
+data["20140308"] = "1 Sam 17:28-40";
+data["20140309"] = "1 Sam 17:41-49";
+data["20140310"] = "1 Sam 17:50-58";
+data["20140311"] = "1 Sam 18:1-9";
+data["20140312"] = "1 Sam 18:10-16";
+data["20140313"] = "1 Sam 18:17-30";
+data["20140314"] = "1 Sam 19:1-7";
+data["20140315"] = "1 Sam 19:8-24";
+data["20140316"] = "1 Sam 20:1-11";
+data["20140317"] = "1 Sam 20:12-23";
+data["20140318"] = "1 Sam 20:24-34";
+data["20140319"] = "1 Sam 20:35-42";
+data["20140320"] = "1 Sam 21:1-9";
+data["20140321"] = "1 Sam 21:10-15";
+data["20140322"] = "1 Sam 22:1-10";
+data["20140323"] = "1 Sam 22:11-23";
+data["20140324"] = "1 Sam 23:1-14";
+data["20140325"] = "1 Sam 23:15-29";
+data["20140326"] = "1 Sam 24:1-15";
+data["20140327"] = "1 Sam 24:16-22";
+data["20140328"] = "1 Sam 25:1-13";
+data["20140329"] = "1 Sam 25:14-22";
+data["20140330"] = "1 Sam 25:23-35";
+data["20140331"] = "1 Sam 25:36-44";
+
+function getRef(date) {
+    return data[date];
+}
+
+function getURL(date) {
+    return "http://www.bible.com/search?q=" + encodeURIComponent(getRef(date)) + "%20NIV";
+}
+
+var jdate = new Date();
+var jdatem = String(jdate.getMonth() + 1);
+if (jdate.getMonth() < 9) jdatem = "0" + jdatem;
+var jdated = String(jdate.getDate());
+if (jdate.getDate() < 10) jdated = "0" + jdated;
+var cdate = String(jdate.getFullYear()) + jdatem + jdated;
+
+document.write('<iframe width="100%" height="100%" src="');
+document.write(getURL(cdate));
+document.write('"/ >');
+
+</script>
 </body>
 </html>
