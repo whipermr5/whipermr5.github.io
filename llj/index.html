@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<style>
+body{
+    margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;
+    padding: 0;
+}
+</style>
+<script>
+var data = {};
+data["20140201"] = "1 Sam 1:1-18";
+data["20140202"] = "1 Sam 1:19-28";
+data["20140203"] = "1 Sam 2:1-11";
+data["20140204"] = "1 Sam 2:12-21";
+data["20140205"] = "1 Sam 2:22-36";
+data["20140206"] = "1 Sam 3:1-14";
+data["20140207"] = "1 Sam 3:15-21";
+data["20140208"] = "1 Sam 4:1-11";
+data["20140209"] = "1 Sam 4:12-22";
+data["20140210"] = "1 Sam 5:1-12";
+data["20140211"] = "1 Sam 6:1-12";
+data["20140212"] = "1 Sam 6:13-21";
+data["20140213"] = "1 Sam 7:1-11";
+data["20140214"] = "1 Sam 7:12-17";
+data["20140215"] = "1 Sam 8:1-9";
+data["20140216"] = "1 Sam 8:10-22";
+data["20140217"] = "1 Sam 9:1-14";
+data["20140218"] = "1 Sam 9:15-27";
+data["20140219"] = "1 Sam 10:1-16";
+data["20140220"] = "1 Sam 10:17-27";
+data["20140221"] = "1 Sam 11:1-15";
+data["20140222"] = "1 Sam 12:1-15";
+data["20140223"] = "1 Sam 12:16-25";
+data["20140224"] = "1 Sam 13:1-12";
+data["20140225"] = "1 Sam 13:13-23";
+data["20140226"] = "1 Sam 14:1-23";
+data["20140227"] = "1 Sam 14:24-46";
+data["20140228"] = "1 Sam 14:47-52";
+data["20140301"] = "1 Sam 15:1-9";
+data["20140302"] = "1 Sam 15:10-23";
+data["20140303"] = "1 Sam 15:24-35";
+data["20140304"] = "1 Sam 16:1-13";
+data["20140305"] = "1 Sam 16:14-23";
+data["20140306"] = "1 Sam 17:1-11";
+data["20140307"] = "1 Sam 17:12-27";
+data["20140308"] = "1 Sam 17:28-40";
+data["20140309"] = "1 Sam 17:41-49";
+data["20140310"] = "1 Sam 17:50-58";
+data["20140311"] = "1 Sam 18:1-9";
+data["20140312"] = "1 Sam 18:10-16";
+data["20140313"] = "1 Sam 18:17-30";
+data["20140314"] = "1 Sam 19:1-7";
+data["20140315"] = "1 Sam 19:8-24";
+data["20140316"] = "1 Sam 20:1-11";
+data["20140317"] = "1 Sam 20:12-23";
+data["20140318"] = "1 Sam 20:24-34";
+data["20140319"] = "1 Sam 20:35-42";
+data["20140320"] = "1 Sam 21:1-9";
+data["20140321"] = "1 Sam 21:10-15";
+data["20140322"] = "1 Sam 22:1-10";
+data["20140323"] = "1 Sam 22:11-23";
+data["20140324"] = "1 Sam 23:1-14";
+data["20140325"] = "1 Sam 23:15-29";
+data["20140326"] = "1 Sam 24:1-15";
+data["20140327"] = "1 Sam 24:16-22";
+data["20140328"] = "1 Sam 25:1-13";
+data["20140329"] = "1 Sam 25:14-22";
+data["20140330"] = "1 Sam 25:23-35";
+data["20140331"] = "1 Sam 25:36-44";
+
+var mdata = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function getRef(year, month, date) {
+    var jdatem = String(month);
+    if (month < 9) jdatem = "0" + jdatem;
+    var jdated = String(date);
+    if (date < 10) jdated = "0" + jdated;
+    var cdate = String(year) + jdatem + jdated;
+    return data[cdate];
+}
+
+function getURL(year, month, date) {
+    return "http://www.biblegateway.com/passage/?search=" + encodeURIComponent(getRef(year, month, date)) + "&version=NIV&interface=print";
+}
+
+var jdate = new Date();
+
+function daysInMonth(year, month) {
+    return new Date(year, month, 0).getDate();
+}
+
+function changePage(year, month, date) {
+    document.getElementById("bif").setAttribute("src", getURL(year, month, date));
+}
+
+function updatePage() {
+    changePage(jdate.getFullYear(), document.getElementById("mdx").selectedIndex + 1, document.getElementById("ddx").value)
+}
+
+function changeMonth() {
+    var select = document.getElementById("ddx");
+    var mselect = document.getElementById("mdx");
+    select.selectedIndex = 0;
+    var length = select.options.length;
+    for (var i = 1; i < length; i++) select.remove(1);
+    for (var i = 1; i <= daysInMonth(jdate.getFullYear(), mselect.selectedIndex + 1); i++) {
+        var option = document.createElement("option");
+        option.text = String(i);
+        select.add(option);
+    }
+}
+</script>
+</head>
+<body onload="changePage(jdate.getFullYear(), jdate.getMonth() + 1, jdate.getDate())">
+
+<div align="center">
+Go to date: <select id="mdx" onchange="changeMonth()">
+<script>
+for (var i = 1; i <= jdate.getMonth() + 1; i++) {
+    if (i == jdate.getMonth() + 1) document.write('<option selected>' + mdata[i-1] + '</option>');
+    else if (i == 1) document.write('<option disabled>' + mdata[i-1] + '</option>');
+    else document.write('<option>' + mdata[i-1] + '</option>');
+}
+</script>
+</select>
+
+<select id="ddx" onchange="updatePage()">
+<option disabled>Select</option>
+<script>
+for (var i = 1; i <= daysInMonth(jdate.getFullYear(), jdate.getMonth() + 1); i++) {
+    if (i == jdate.getDate()) document.write('<option selected>' + String(i) + '</option>');
+    else document.write('<option>' + String(i) + '</option>');
+}
+</script>
+</select>
+</div>
+
+<iframe style="border: 0; position:absolute; top:1; left:0; right:0; bottom:0; width:100%; height:95%" id="bif" src="about:blank" />
+</body>
+</html>
