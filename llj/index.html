@@ -4,10 +4,15 @@
 <title>LLJ</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 <style>
-body{
-    margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;
-    padding: 0;
-}
+    body { margin: 0 }
+    .row, .col { overflow: hidden; position: absolute; }
+    .row { left: 0; right: 0; }
+    .col { top: 0; bottom: 0; }
+    .scroll-x { overflow-x: auto; }
+    .scroll-y { overflow-y: auto; }
+
+    .header.row { height: 30px; top: 0; }
+    .body.row { top: 30px; bottom: 0; }
 </style>
 <script>
 var data = {};
@@ -124,7 +129,7 @@ function today() {
 </head>
 <body onload="changePage(jdate.getFullYear(), jdate.getMonth() + 1, jdate.getDate())">
 
-<div align="center">
+<div class="header row" align="center">
 Go to date: <select id="mdx" onchange="changeMonth()">
 <script>
 for (var i = 1; i <= jdate.getMonth() + 1; i++) {
@@ -147,6 +152,9 @@ for (var i = 1; i <= daysInMonth(jdate.getFullYear(), jdate.getMonth() + 1); i++
 <input type="button" value="Today" onclick="today()" />
 </div>
 
-<iframe style="border: 0; position:absolute; top:1; left:0; right:0; bottom:0; width:100%; height:95%" id="bif" src="about:blank" />
+<div class="body row scroll-y">
+<iframe style="display: block; border: 0; width:100%; height:100%" id="bif" src="about:blank" />
+</div>
+
 </body>
 </html>
