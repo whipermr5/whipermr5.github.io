@@ -10,6 +10,34 @@ body{
 </style>
 <script>
 var data = {};
+data["20140201"] = "1 Sam 1:1-18";
+data["20140202"] = "1 Sam 1:19-28";
+data["20140203"] = "1 Sam 2:1-11";
+data["20140204"] = "1 Sam 2:12-21";
+data["20140205"] = "1 Sam 2:22-36";
+data["20140206"] = "1 Sam 3:1-14";
+data["20140207"] = "1 Sam 3:15-21";
+data["20140208"] = "1 Sam 4:1-11";
+data["20140209"] = "1 Sam 4:12-22";
+data["20140210"] = "1 Sam 5:1-12";
+data["20140211"] = "1 Sam 6:1-12";
+data["20140212"] = "1 Sam 6:13-21";
+data["20140213"] = "1 Sam 7:1-11";
+data["20140214"] = "1 Sam 7:12-17";
+data["20140215"] = "1 Sam 8:1-9";
+data["20140216"] = "1 Sam 8:10-22";
+data["20140217"] = "1 Sam 9:1-14";
+data["20140218"] = "1 Sam 9:15-27";
+data["20140219"] = "1 Sam 10:1-16";
+data["20140220"] = "1 Sam 10:17-27";
+data["20140221"] = "1 Sam 11:1-15";
+data["20140222"] = "1 Sam 12:1-15";
+data["20140223"] = "1 Sam 12:16-25";
+data["20140224"] = "1 Sam 13:1-12";
+data["20140225"] = "1 Sam 13:13-23";
+data["20140226"] = "1 Sam 14:1-23";
+data["20140227"] = "1 Sam 14:24-46";
+data["20140228"] = "1 Sam 14:47-52";
 data["20140301"] = "1 Sam 15:1-9";
 data["20140302"] = "1 Sam 15:10-23";
 data["20140303"] = "1 Sam 15:24-35";
@@ -91,23 +119,24 @@ function changeMonth() {
 Go to date: <select id="mdx" onchange="changeMonth()">
 <script>
 for (var i = 1; i <= jdate.getMonth() + 1; i++) {
-    if (i == jdate.getMonth() + 1) document.write('<option selected="selected">' + mdata[i-1] + '</option>');
+    if (i == jdate.getMonth() + 1) document.write('<option selected>' + mdata[i-1] + '</option>');
+    else if (i == 1) document.write('<option disabled>' + mdata[i-1] + '</option>');
     else document.write('<option>' + mdata[i-1] + '</option>');
 }
 </script>
 </select>
 
 <select id="ddx" onchange="updatePage()">
-<option value="" disabled selected style="display:none;">Select</option>
+<option disabled>Select</option>
 <script>
 for (var i = 1; i <= daysInMonth(jdate.getFullYear(), jdate.getMonth() + 1); i++) {
-    if (i == jdate.getDate()) document.write('<option selected="selected">' + String(i) + '</option>');
+    if (i == jdate.getDate()) document.write('<option selected>' + String(i) + '</option>');
     else document.write('<option>' + String(i) + '</option>');
 }
 </script>
 </select>
 </div>
 
-<iframe style="border: 0; position:absolute; top:1; left:0; right:0; bottom:0; width:100%; height:90%" id="bif" src="about:blank" />
+<iframe style="border: 0; position:absolute; top:1; left:0; right:0; bottom:0; width:100%; height:95%" id="bif" src="about:blank" />
 </body>
 </html>
