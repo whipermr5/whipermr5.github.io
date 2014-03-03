@@ -136,6 +136,7 @@ for (var i = 1; i <= daysInMonth(jdate.getFullYear(), jdate.getMonth() + 1); i++
 }
 </script>
 </select>
+<input type="button" value="Today" onclick="changePage(jdate.getFullYear(), jdate.getMonth() + 1, jdate.getDate())" />
 </div>
 
 <iframe style="border: 0; position:absolute; top:1; left:0; right:0; bottom:0; width:100%; height:95%" id="bif" src="about:blank" />
