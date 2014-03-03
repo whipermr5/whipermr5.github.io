@@ -2,8 +2,12 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-</head>
-<body>
+<style>
+body{
+    margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;
+    padding: 0;
+}
+</style>
 <script>
 var data = {};
 data["20140301"] = "1 Sam 15:1-9";
@@ -38,25 +42,72 @@ data["20140329"] = "1 Sam 25:14-22";
 data["20140330"] = "1 Sam 25:23-35";
 data["20140331"] = "1 Sam 25:36-44";
 
-function getRef(date) {
-    return data[date];
+var mdata = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function getRef(year, month, date) {
+    var jdatem = String(month);
+    if (month < 9) jdatem = "0" + jdatem;
+    var jdated = String(date);
+    if (date < 10) jdated = "0" + jdated;
+    var cdate = String(year) + jdatem + jdated;
+    return data[cdate];
 }
 
-function getURL(date) {
-    return "http://www.biblegateway.com/passage/?search=" + encodeURIComponent(getRef(date)) + "&version=NIV&interface=print";
+function getURL(year, month, date) {
+    return "http://www.biblegateway.com/passage/?search=" + encodeURIComponent(getRef(year, month, date)) + "&version=NIV&interface=print";
 }
 
 var jdate = new Date();
-var jdatem = String(jdate.getMonth() + 1);
-if (jdate.getMonth() < 9) jdatem = "0" + jdatem;
-var jdated = String(jdate.getDate());
-if (jdate.getDate() < 10) jdated = "0" + jdated;
-var cdate = String(jdate.getFullYear()) + jdatem + jdated;
 
-document.write('<iframe style="position: absolute; height: 100%; width: 100%" src="');
-document.write(getURL(cdate));
-document.write('"/ >');
+function daysInMonth(year, month) {
+    return new Date(year, month, 0).getDate();
+}
 
+function changePage(year, month, date) {
+    document.getElementById("bif").setAttribute("src", getURL(year, month, date));
+}
+
+function updatePage() {
+    changePage(jdate.getFullYear(), document.getElementById("mdx").selectedIndex + 1, document.getElementById("ddx").value)
+}
+
+function changeMonth() {
+    var select = document.getElementById("ddx");
+    var mselect = document.getElementById("mdx");
+    select.selectedIndex = 0;
+    var length = select.options.length;
+    for (var i = 1; i < length; i++) select.remove(1);
+    for (var i = 1; i <= daysInMonth(jdate.getFullYear(), mselect.selectedIndex + 1); i++) {
+        var option = document.createElement("option");
+        option.text = String(i);
+        select.add(option);
+    }
+}
 </script>
+</head>
+<body onload="changePage(jdate.getFullYear(), jdate.getMonth() + 1, jdate.getDate())">
+
+<div align="center">
+Go to date: <select id="mdx" onchange="changeMonth()">
+<script>
+for (var i = 1; i <= jdate.getMonth() + 1; i++) {
+    if (i == jdate.getMonth() + 1) document.write('<option selected="selected">' + mdata[i-1] + '</option>');
+    else document.write('<option>' + mdata[i-1] + '</option>');
+}
+</script>
+</select>
+
+<select id="ddx" onchange="updatePage()">
+<option value="" disabled selected style="display:none;">Select</option>
+<script>
+for (var i = 1; i <= daysInMonth(jdate.getFullYear(), jdate.getMonth() + 1); i++) {
+    if (i == jdate.getDate()) document.write('<option selected="selected">' + String(i) + '</option>');
+    else document.write('<option>' + String(i) + '</option>');
+}
+</script>
+</select>
+</div>
+
+<iframe style="border: 0; position:absolute; top:1; left:0; right:0; bottom:0; width:100%; height:90%" id="bif" src="about:blank" />
 </body>
 </html>
