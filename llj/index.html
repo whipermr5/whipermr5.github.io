@@ -116,8 +116,9 @@ function changeMonth() {
 function today() {
     var dselect = document.getElementById("ddx");
     var mselect = document.getElementById("mdx");
-    dselect.selectedIndex = jdate.getDate();
     mselect.selectedIndex = jdate.getMonth();
+    changeMonth();
+    dselect.selectedIndex = jdate.getDate();
     changePage(jdate.getFullYear(), jdate.getMonth() + 1, jdate.getDate())
 }
 </script>
